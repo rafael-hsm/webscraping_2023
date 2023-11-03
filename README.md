@@ -50,3 +50,8 @@ scrapy crawl worldometers
 
 ## Save in json
 scrapy crawl worldometer -o population.json
+
+## Libraries to use MongoDB
+pymongo dnspython
+
+about database, remember change the file pipelines.py to correscpond with your class configuration
