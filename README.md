@@ -55,3 +55,47 @@ scrapy crawl worldometer -o population.json
 pymongo dnspython
 
 about database, remember change the file pipelines.py to correscpond with your class configuration
+
+## Usando o SPLASH via docker
+
+docker pull scrapinghub/splash
+
+docker run -it -p 8050:8050 scrapinghub/splash
+
+After open your browser in localhost:8050
+
+example how use to splash
+
+```lua
+function main(splash, args)
+  url = args.url
+	assert(splash:go(url))
+  assert(splash:wait(30))
+  return {
+    png = splash:png(),
+    html = splash:html()
+    }
+end
+```
+
+## INSTALL SCRAPY-SPLASH
+
+website target: https://www.adamchoi.co.uk/overs/detailed
+```bash
+pip install scrapy-splash
+```
+
+## Configuration
+https://github.com/scrapy-plugins/scrapy-splash
+In settings.py
+```python
+SPLASH_URL = 'http://192.168.59.103:8050'
+```
+
+```python
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
+```
